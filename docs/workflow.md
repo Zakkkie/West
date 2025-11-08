@@ -10,10 +10,11 @@
    python -m venv .venv
    source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
    ```
-4. Установите зависимости:
+4. Если хотите работать с реальным API, установите зависимость `requests`:
    ```bash
    pip install -r requirements.txt
    ```
+   Для офлайн-режима установка не обязательна.
 5. Если у вас есть токен, создайте файл `.env` на основе `.env.example` и укажите `TWITTER_BEARER_TOKEN`. Без токена можно выполнять учебный режим с `--demo-data`.
 
 ## 2. Сбор данных

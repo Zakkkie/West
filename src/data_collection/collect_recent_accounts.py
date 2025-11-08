@@ -14,12 +14,11 @@ import json
 import os
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+from importlib import import_module
+from importlib.util import find_spec
 from itertools import islice
 from pathlib import Path
 from typing import Iterable, Iterator, List, Optional
-
-import requests
-from dotenv import load_dotenv
 
 TWITTER_API_URL = "https://api.twitter.com/2/tweets/search/recent"
 
@@ -125,12 +124,24 @@ def get_headers(token: str) -> dict:
     return {"Authorization": f"Bearer {token}"}
 
 
+def ensure_requests_available():
+    """Возвращает модуль requests или подсказывает, как его установить."""
+
+    if find_spec("requests") is None:
+        raise RuntimeError(
+            "Для обращения к Twitter API требуется пакет 'requests'. "
+            "Установите его командой 'pip install requests' или запустите скрипт в режиме --demo-data."
+        )
+    return import_module("requests")
+
+
 def request_page(
     token: str,
     query: str,
     start_time: datetime,
     next_token: Optional[str],
 ) -> dict:
+    requests = ensure_requests_available()
     params = {
         "query": query,
         "max_results": 100,
@@ -282,7 +293,7 @@ def collect_trending_accounts(args: argparse.Namespace) -> List[TrendingAccount]
             )
         return trending
 
-    load_dotenv()
+    load_env_file()
     token = os.getenv("TWITTER_BEARER_TOKEN")
     if not token:
         raise RuntimeError(
@@ -322,6 +333,20 @@ def main() -> None:
         return
     write_csv(args.output, accounts)
     print(f"Сохранено {len(accounts)} аккаунтов в {args.output}")
+
+
+def load_env_file(path: Path = Path(".env")) -> None:
+    """Простая загрузка переменных окружения из файла .env."""
+
+    if not path.exists():
+        return
+    with path.open(encoding="utf-8") as env_file:
+        for line in env_file:
+            stripped = line.strip()
+            if not stripped or stripped.startswith("#") or "=" not in stripped:
+                continue
+            key, _, value = stripped.partition("=")
+            os.environ.setdefault(key.strip(), value.strip())
 
 
 if __name__ == "__main__":

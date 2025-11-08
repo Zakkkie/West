@@ -22,11 +22,11 @@ West/
 
 ## 3. Подготовка окружения
 1. Установите Python 3.10+.
-2. Создайте виртуальное окружение и установите зависимости:
+2. Создайте виртуальное окружение. Если планируете работать с реальным Twitter API, установите зависимость `requests`:
    ```bash
    python -m venv .venv
    source .venv/bin/activate  # Windows: .venv\\Scripts\\activate
-   pip install -r requirements.txt
+   pip install -r requirements.txt  # офлайн-режим можно запускать без этой установки
    ```
 3. Скопируйте `.env.example` в `.env` и добавьте `TWITTER_BEARER_TOKEN` (его можно получить через [Developer Portal](https://developer.twitter.com/en/portal/dashboard)). Если токена нет, используйте учебный режим (`--demo-data`).
 4. При желании измените язык поиска через `DEFAULT_TWEET_LANGUAGE`.
@@ -66,6 +66,7 @@ West/
   python src/analysis/rank_accounts.py data/processed/trending_accounts*.csv
   ```
 * Скрипт посчитает количество найденных твитов, среднюю и максимальную вовлечённость, затем сохранит топ-20 аккаунтов в `data/processed/ranked_accounts.csv`. Если входные файлы отсутствуют, программа подскажет, что нужно сначала собрать данные.
+* Для работы скрипта достаточно стандартной библиотеки Python — дополнительные пакеты не требуются.
 
 ## 6. Дальнейшие шаги для самообучения
 1. Пройдите полный учебный сценарий из файла [`docs/workflow.md`](docs/workflow.md).
