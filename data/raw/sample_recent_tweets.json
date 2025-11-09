@@ -1,155 +1,146 @@
- (cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF' 
-diff --git a/data/raw/sample_recent_tweets.json b/data/raw/sample_recent_tweets.json
-new file mode 100644
-index 0000000000000000000000000000000000000000..50c231491e75f1f161c57df9e9bd17d986e771e0
---- /dev/null
-+++ b/data/raw/sample_recent_tweets.json
-@@ -0,0 +1,145 @@
-+[
-+  {
-+    "meta": {
-+      "result_count": 3,
-+      "next_token": "demo-page-2"
-+    },
-+    "data": [
-+      {
-+        "id": "171",
-+        "text": "Introducing NovaBoard — tracking AI side projects gaining traction. #buildinpublic",
-+        "author_id": "9001",
-+        "created_at": "2024-03-21T10:15:00.000Z",
-+        "public_metrics": {
-+          "like_count": 58,
-+          "retweet_count": 24,
-+          "reply_count": 6,
-+          "quote_count": 3
-+        }
-+      },
-+      {
-+        "id": "172",
-+        "text": "Weekend experiment: mapping underrated indie hackers to follow. Suggestions?",
-+        "author_id": "9002",
-+        "created_at": "2024-03-21T10:40:00.000Z",
-+        "public_metrics": {
-+          "like_count": 16,
-+          "retweet_count": 7,
-+          "reply_count": 4,
-+          "quote_count": 1
-+        }
-+      },
-+      {
-+        "id": "173",
-+        "text": "Built a script that spots researchers whose preprints suddenly explode with citations.",
-+        "author_id": "9003",
-+        "created_at": "2024-03-21T11:02:00.000Z",
-+        "public_metrics": {
-+          "like_count": 80,
-+          "retweet_count": 31,
-+          "reply_count": 11,
-+          "quote_count": 5
-+        }
-+      }
-+    ],
-+    "includes": {
-+      "users": [
-+        {
-+          "id": "9001",
-+          "username": "nova_builds",
-+          "name": "Nova Builds",
-+          "created_at": "2023-10-09T08:00:00.000Z",
-+          "public_metrics": {
-+            "followers_count": 3800,
-+            "following_count": 420,
-+            "tweet_count": 612,
-+            "listed_count": 8
-+          }
-+        },
-+        {
-+          "id": "9002",
-+          "username": "analytica_io",
-+          "name": "Analytica.io",
-+          "created_at": "2022-06-14T12:10:00.000Z",
-+          "public_metrics": {
-+            "followers_count": 950,
-+            "following_count": 190,
-+            "tweet_count": 288,
-+            "listed_count": 2
-+          }
-+        },
-+        {
-+          "id": "9003",
-+          "username": "labsignals",
-+          "name": "Lab Signals",
-+          "created_at": "2021-04-30T19:25:00.000Z",
-+          "public_metrics": {
-+            "followers_count": 5200,
-+            "following_count": 305,
-+            "tweet_count": 1042,
-+            "listed_count": 11
-+          }
-+        }
-+      ]
-+    }
-+  },
-+  {
-+    "meta": {
-+      "result_count": 2
-+    },
-+    "data": [
-+      {
-+        "id": "174",
-+        "text": "Thread: how I track rising voices in climate tech before they blow up.",
-+        "author_id": "9002",
-+        "created_at": "2024-03-21T11:25:00.000Z",
-+        "public_metrics": {
-+          "like_count": 22,
-+          "retweet_count": 9,
-+          "reply_count": 3,
-+          "quote_count": 2
-+        }
-+      },
-+      {
-+        "id": "175",
-+        "text": "Micro SaaS growth logs week 12 — newsletter signups doubled overnight!",
-+        "author_id": "9004",
-+        "created_at": "2024-03-21T11:44:00.000Z",
-+        "public_metrics": {
-+          "like_count": 34,
-+          "retweet_count": 15,
-+          "reply_count": 5,
-+          "quote_count": 2
-+        }
-+      }
-+    ],
-+    "includes": {
-+      "users": [
-+        {
-+          "id": "9002",
-+          "username": "analytica_io",
-+          "name": "Analytica.io",
-+          "created_at": "2022-06-14T12:10:00.000Z",
-+          "public_metrics": {
-+            "followers_count": 980,
-+            "following_count": 192,
-+            "tweet_count": 291,
-+            "listed_count": 3
-+          }
-+        },
-+        {
-+          "id": "9004",
-+          "username": "shipfastclub",
-+          "name": "Ship Fast Club",
-+          "created_at": "2023-01-17T09:45:00.000Z",
-+          "public_metrics": {
-+            "followers_count": 4100,
-+            "following_count": 510,
-+            "tweet_count": 734,
-+            "listed_count": 6
-+          }
-+        }
-+      ]
-+    }
-+  }
-+]
+[
+  {
+    "meta": {
+      "result_count": 3,
+      "next_token": "demo-page-2"
+    },
+    "data": [
+      {
+        "id": "171",
+        "text": "Introducing NovaBoard — tracking AI side projects gaining traction. #buildinpublic",
+        "author_id": "9001",
+        "created_at": "2024-03-21T10:15:00.000Z",
+        "public_metrics": {
+          "like_count": 58,
+          "retweet_count": 24,
+          "reply_count": 6,
+          "quote_count": 3
+        }
+      },
+      {
+        "id": "172",
+        "text": "Weekend experiment: mapping underrated indie hackers to follow. Suggestions?",
+        "author_id": "9002",
+        "created_at": "2024-03-21T10:40:00.000Z",
+        "public_metrics": {
+          "like_count": 16,
+          "retweet_count": 7,
+          "reply_count": 4,
+          "quote_count": 1
+        }
+      },
+      {
+        "id": "173",
+        "text": "Built a script that spots researchers whose preprints suddenly explode with citations.",
+        "author_id": "9003",
+        "created_at": "2024-03-21T11:02:00.000Z",
+        "public_metrics": {
+          "like_count": 80,
+          "retweet_count": 31,
+          "reply_count": 11,
+          "quote_count": 5
+        }
+      }
+    ],
+    "includes": {
+      "users": [
+        {
+          "id": "9001",
+          "username": "nova_builds",
+          "name": "Nova Builds",
+          "created_at": "2023-10-09T08:00:00.000Z",
+          "public_metrics": {
+            "followers_count": 3800,
+            "following_count": 420,
+            "tweet_count": 612,
+            "listed_count": 8
+          }
+        },
+        {
+          "id": "9002",
+          "username": "analytica_io",
+          "name": "Analytica.io",
+          "created_at": "2022-06-14T12:10:00.000Z",
+          "public_metrics": {
+            "followers_count": 950,
+            "following_count": 190,
+            "tweet_count": 288,
+            "listed_count": 2
+          }
+        },
+        {
+          "id": "9003",
+          "username": "labsignals",
+          "name": "Lab Signals",
+          "created_at": "2021-04-30T19:25:00.000Z",
+          "public_metrics": {
+            "followers_count": 5200,
+            "following_count": 305,
+            "tweet_count": 1042,
+            "listed_count": 11
+          }
+        }
+      ]
+    }
+  },
+  {
+    "meta": {
+      "result_count": 2
+    },
+    "data": [
+      {
+        "id": "174",
+        "text": "Thread: how I track rising voices in climate tech before they blow up.",
+        "author_id": "9002",
+        "created_at": "2024-03-21T11:25:00.000Z",
+        "public_metrics": {
+          "like_count": 22,
+          "retweet_count": 9,
+          "reply_count": 3,
+          "quote_count": 2
+        }
+      },
+      {
+        "id": "175",
+        "text": "Micro SaaS growth logs week 12 — newsletter signups doubled overnight!",
+        "author_id": "9004",
+        "created_at": "2024-03-21T11:44:00.000Z",
+        "public_metrics": {
+          "like_count": 34,
+          "retweet_count": 15,
+          "reply_count": 5,
+          "quote_count": 2
+        }
+      }
+    ],
+    "includes": {
+      "users": [
+        {
+          "id": "9002",
+          "username": "analytica_io",
+          "name": "Analytica.io",
+          "created_at": "2022-06-14T12:10:00.000Z",
+          "public_metrics": {
+            "followers_count": 980,
+            "following_count": 192,
+            "tweet_count": 291,
+            "listed_count": 3
+          }
+        },
+        {
+          "id": "9004",
+          "username": "shipfastclub",
+          "name": "Ship Fast Club",
+          "created_at": "2023-01-17T09:45:00.000Z",
+          "public_metrics": {
+            "followers_count": 4100,
+            "following_count": 510,
+            "tweet_count": 734,
+            "listed_count": 6
+          }
+        }
+      ]
+    }
+  }
+]
  
-EOF
-)
