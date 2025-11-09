@@ -58,7 +58,9 @@ python src/data_collection/collect_recent_accounts.py `
 
 Команда читает подготовленный JSON-файл, фильтрует аккаунты и сохраняет CSV по
 пути `data/processed/trending_accounts.csv`. Обратный апостроф (`` ` ``) в конце
-строки — символ переноса в PowerShell.
+строки — символ переноса в PowerShell. Убедитесь, что каждый параметр начинается
+с двух дефисов (`--`); иначе PowerShell воспримет имя параметра как отдельную
+команду и выведет ошибку «Имя ... не распознано».
 
 **Боевой режим с Twitter API:**
 
@@ -84,6 +86,22 @@ python src/data_collection/collect_recent_accounts.py `
 просмотрите его в терминале командой `type data\processed\trending_accounts.csv`
 (`cat` на Linux/macOS). Если файл пустой, уменьшите значение
 `--min-engagement` или увеличьте `--pages`.
+
+### 7. Диагностика типичных ошибок
+
+Если при запуске скрипта появляется сообщение
+`IndentationError: unexpected indent`, а первая строка файла
+`src/data_collection/collect_recent_accounts.py` выглядит как
+`(cd "$(git rev-parse --show-toplevel)" && git apply --3way <<'EOF'`, файл был
+случайно перезаписан обрывком команды. Восстановить исходный код можно так:
+
+```powershell
+python scripts/doctor.py --restore-collector
+```
+
+Скрипт заменит файл на эталонную версию из `scripts/reference`, после чего
+повторно выполнит диагностику и подскажет дальнейшие шаги. Это особенно полезно,
+если проект был скачан из ZIP-архива и команда `git checkout` недоступна.
 
 ## Анализ нескольких выгрузок
 

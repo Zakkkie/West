@@ -14,9 +14,16 @@ Run the script with ``python scripts/doctor.py`` from the project root. It will
 print actionable guidance for any issues that it detects. The script exits with
 status code 0 when everything looks fine, or 1 otherwise so that it can be used
 in automated diagnostics.
+
+Pass ``--restore-collector`` to rewrite ``collect_recent_accounts.py`` with the
+known-good reference copy bundled in ``scripts/reference``. This option is
+useful for users who downloaded the project as a ZIP archive and therefore
+cannot rely on ``git checkout`` to repair the file.
 """
 from __future__ import annotations
 
+import argparse
+import shutil
 import sys
 from pathlib import Path
 from textwrap import dedent
@@ -24,6 +31,7 @@ from textwrap import dedent
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 COLLECTOR_PATH = PROJECT_ROOT / "src" / "data_collection" / "collect_recent_accounts.py"
+REFERENCE_COLLECTOR_PATH = PROJECT_ROOT / "scripts" / "reference" / "collect_recent_accounts.py"
 
 
 def check_git_checkout() -> list[str]:
@@ -68,7 +76,43 @@ def check_collector_header() -> list[str]:
     ]
 
 
+def restore_collector() -> list[str]:
+    """Copy the known-good collector implementation into place."""
+
+    if not REFERENCE_COLLECTOR_PATH.exists():
+        return [
+            "Не найден эталонный collect_recent_accounts.py в scripts/reference.",
+            "Обновите репозиторий до последней версии и повторите попытку.",
+        ]
+
+    COLLECTOR_PATH.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(REFERENCE_COLLECTOR_PATH, COLLECTOR_PATH)
+
+    return [
+        "collect_recent_accounts.py восстановлен из scripts/reference.",
+        "Запустите команду повторно, чтобы убедиться, что ошибка исчезла.",
+    ]
+
+
+def parse_args() -> argparse.Namespace:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument(
+        "--restore-collector",
+        action="store_true",
+        help="перезаписать collect_recent_accounts.py эталонной версией",
+    )
+    return parser.parse_args()
+
+
 def main() -> int:
+    args = parse_args()
+
+    if args.restore_collector:
+        messages = restore_collector()
+        print("\n".join(messages))
+        # Continue with diagnostics afterwards so the user immediately sees the
+        # updated status.
+
     issues: list[str] = []
     issues.extend(check_git_checkout())
     issues.extend(check_collector_header())
